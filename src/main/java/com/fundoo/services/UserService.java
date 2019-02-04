@@ -1,6 +1,6 @@
 package com.fundoo.services;
 
-import com.fundoo.models.GenerateOTP;
+import com.fundoo.models.GenerateOtp;
 import com.fundoo.models.User;
 
 
@@ -13,7 +13,7 @@ public interface UserService {
 	boolean sendOtpCall(User user);
 
 	
-	boolean verifyOtp(GenerateOTP userOtp);
+	boolean verifyOtp(GenerateOtp userOtp);
 
 
 	boolean updateUser(User user, Integer id);
@@ -31,6 +31,6 @@ public interface UserService {
 	boolean forgetPassword(User user);
 
 
-	boolean forgetVerification(GenerateOTP generateOtp, User forgetUser);
+	boolean forgetVerification(GenerateOtp generateOtp, User forgetUser);
 
 }

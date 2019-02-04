@@ -94,13 +94,14 @@ package com.fundoo.utility;
 	    
 	    public static void sendEmail(User user,String password)
 		{  
-		     send("fundoonote2019@gmail.com","iddqzqjjfyjiktzu",user.getEmail(), password);  
+		     send("aman.kumar627@gmail.com","sxxneeyeikxazsas",user.getEmail(), password);  
 
 		}
 		
 	    public static void send(final String from,final String password,String to,String pwd){  
 	        //Get properties object    
-	        Properties props = new Properties();    
+	        Properties props = new Properties(); 
+	       
 	        props.put("mail.smtp.host", "smtp.gmail.com");    
 	        props.put("mail.smtp.socketFactory.port", "465");    
 	        props.put("mail.smtp.socketFactory.class",    
@@ -120,8 +121,8 @@ package com.fundoo.utility;
 	         message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));    
 	         message.setSubject("Verification mail"); 
 	         
-	         String msg="you have to verify the otp: "+pwd;
-	         message.setText(msg);    
+	     
+	         message.setText("otp is"+pwd);    
 	         //send message  
 	         Transport.send(message);    
 	         System.out.println("message sent successfully");    

@@ -2,7 +2,7 @@ package com.fundoo.dao;
 
 import java.util.List;
 
-import com.fundoo.models.GenerateOTP;
+import com.fundoo.models.GenerateOtp;
 import com.fundoo.models.User;
 
 public interface UserDAO {
@@ -13,9 +13,9 @@ public interface UserDAO {
 
 	List<User> getAllUser();
 
-	void saveOtp(GenerateOTP userOtp);
+	void saveOtp(GenerateOtp userOtp);
 
-	List<GenerateOTP> getAllOtp();
+	List<GenerateOtp> getAllOtp();
 
 
 	User getUser(Integer id);
@@ -24,5 +24,5 @@ public interface UserDAO {
 
 	boolean deleteUser(User updateUser);
 
-	boolean updateOtp(GenerateOTP newUserOtp);
+	boolean updateOtp(GenerateOtp newUserOtp);
 }

@@ -20,6 +20,9 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.fundoo.dao.UserDAO;
+import com.fundoo.dao.UserDaoImpl;
+
 @Configuration
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
@@ -82,4 +85,7 @@ public class ServletConfig {
        {
     	   return "aman";
        }
+       
+       
+	
 }

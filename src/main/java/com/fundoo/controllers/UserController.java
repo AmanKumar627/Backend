@@ -20,15 +20,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fundoo.models.GenerateOTP;
+import com.fundoo.models.GenerateOtp;
 
 import com.fundoo.services.UserService;
+import com.fundoo.utility.Utility;
 
 
 
 @RestController
-@RequestMapping(value="/api/user")
-//@CrossOrigin(origins = { "http://localhost:4200" }, exposedHeaders = { "jwtTokenxxx" })
+
+@CrossOrigin(origins = { "http://localhost:4200" }, exposedHeaders = { "jwtTokenxxx" })
 public class UserController {
 	
 	User tempUser, forgetUser;
@@ -94,9 +95,10 @@ public class UserController {
 	@RequestMapping(value="/sendOtp", method=RequestMethod.POST)
 	public ResponseEntity<Response> sendOtp(@RequestBody User user,HttpServletRequest request)
 	{
+		System.out.println("aman");
 		tempUser=new User();
 		tempUser=user;
-		System.out.println(userService);
+		System.out.println(user+"          sowndar");
 		boolean check=userService.sendOtpCall(user);
 
 		response=new Response();
@@ -115,20 +117,21 @@ public class UserController {
 	
 	
 	
-	
 	@RequestMapping(value="/otpVerify", method=RequestMethod.POST)
-	public ResponseEntity<Response> veifyOtp(@RequestBody GenerateOTP userOtp)
+	public ResponseEntity<Response> veifyOtp(@RequestBody GenerateOtp userOtp)
 	{
 	//	System.out.println(userOtp.getEmail()+" "+userOtp.getOtpPassword());
 		System.out.println(userOtp.getOtpPassword());
+		
 		boolean check=userService.verifyOtp(userOtp);
 		response=new Response();
 		if(check)
 		{
+			
 			response.setStatusCode(200);
 			response.setStatus("otp is match");
 			
-			registerUser(forgetUser);
+			registerUser();
 		
 			
 			return new ResponseEntity<Response>(response,HttpStatus.OK);
@@ -141,10 +144,19 @@ public class UserController {
 	
 	
 	@RequestMapping(value="/registerUser",method=RequestMethod.POST)
-	public ResponseEntity<Response> registerUser(@RequestBody User user )
+	public ResponseEntity<Response> registerUser()
 	{
-		System.out.println(user);
-		boolean check=userService.addUser(user);
+		
+		
+		
+		
+		
+		
+		
+		
+		System.out.println(tempUser);
+		boolean check=userService.addUser(tempUser);
+		
 		response=new Response();
 		if(check)
 		{
@@ -213,7 +225,7 @@ public class UserController {
 	
 	
 	@RequestMapping(value="/forgetOtpVerification", method=RequestMethod.POST)
-	public ResponseEntity<Response> forgetOtpVerify(@RequestBody GenerateOTP generateOtp)
+	public ResponseEntity<Response> forgetOtpVerify(@RequestBody GenerateOtp generateOtp)
 	{
 		boolean check=userService.forgetVerification(generateOtp,forgetUser);
 		response=new Response();

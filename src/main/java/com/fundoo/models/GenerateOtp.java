@@ -1,5 +1,7 @@
 package com.fundoo.models;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
@@ -9,15 +11,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="GenerateOtp")
-public class GenerateOTP {
+public class GenerateOtp implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
-	@Column(name="id")
+//	@Column(name="id")
 	private int id;
-	@Column(name="email")
+//	@Column(name="email")
 	private String email;
-	@Column(name="otpPassword")
+//	@Column(name="otpPassword")
 	private String otpPassword;
 	public String getEmail() {
 		return email;

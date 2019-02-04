@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fundoo.models.GenerateOTP;
+import com.fundoo.models.GenerateOtp;
 import com.fundoo.utility.UserToken;
 import com.fundoo.utility.Utility;
 import com.fundoo.dao.UserDAO;
@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService {
 		System.out.println(userDao + " " + key);
 		
 		String encryptedPassword = Utility.encrypt(user.getPassword(), key);
+		System.out.println(key);
 		System.out.println("check2");
 		System.out.println(encryptedPassword);
 		
@@ -51,20 +52,22 @@ public class UserServiceImpl implements UserService {
 	public boolean sendOtpCall(User user) {
 
 		List<User> userList = userDao.getAllUser();
-		List<GenerateOTP> generateOtps = userDao.getAllOtp();
+		List<GenerateOtp> generateOtps = userDao.getAllOtp();
 		for (int i = 0; i < userList.size(); i++) {
-			if (user.getEmail().equals(userList.get(i).getEmail())
-					&& generateOtps.get(i).getEmail().equals(user.getEmail())) {
+			System.out.println(userList.get(i));
+		if (user.getEmail().equals(userList.get(i).getEmail())
+				&& generateOtps.get(i).getEmail().equals(user.getEmail())) {
 				System.out.println("already exist");
 				return false;
 			}
 		}
 		String password = Utility.OTP();
-		GenerateOTP userOtp = new GenerateOTP();
-		System.out.println(user);
+		GenerateOtp userOtp = new GenerateOtp();
+		
 //		userOtp.setEmail(user.getEmail());
 //		userOtp.setOtpPassword(password);
 		for (int i = 0; i < generateOtps.size(); i++) {
+			System.out.println("aadsads");
 			if (user.getEmail().equals(generateOtps.get(i).getEmail())) {
 				userOtp = generateOtps.get(i);
 				System.out.println(userOtp);
@@ -76,6 +79,7 @@ public class UserServiceImpl implements UserService {
 				return true;
 			}
 		}
+		System.out.println("hiiii");
 		userOtp.setEmail(user.getEmail());
 		userOtp.setOtpPassword(password);
 		userDao.saveOtp(userOtp);
@@ -85,14 +89,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean verifyOtp(GenerateOTP userOtp) {
-
-		List<GenerateOTP> otp = userDao.getAllOtp();
+	public boolean verifyOtp(GenerateOtp userOtp) {
+     System.out.println("aman"+userOtp.getOtpPassword());
+		List<GenerateOtp> otp = userDao.getAllOtp();
+		
+		
 		System.out.println("hdjsg");
 		System.out.println(userOtp.getEmail() + " " + userOtp.getOtpPassword() + " " + otp.size());
-		for (int i = 0; i < otp.size(); i++) {
+		for (int i = 0; i < otp.size(); i++) 
+		{
+			System.out.println("hihihih");
+			System.out.println(otp.get(i).getOtpPassword());
 			if (userOtp.getOtpPassword().equals(otp.get(i).getOtpPassword())) {
-				System.out.println("hi");
+				//System.out.println("hi");
 				return true;
 			}
 		}
@@ -154,13 +163,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean forgetPassword(User user) {
 		List<User> userList = userDao.getAllUser();
-		List<GenerateOTP> userOtp = userDao.getAllOtp();
+		List<GenerateOtp> userOtp = userDao.getAllOtp();
 		for (int i = 0; i < userList.size(); i++) {
 			if (user.getEmail().equals(userList.get(i).getEmail())) {
 				// User newUser=userList.get(i);
 
 				String password = Utility.OTP();
-				GenerateOTP newUserOtp = new GenerateOTP();
+				GenerateOtp newUserOtp = new GenerateOtp();
 
 				if (userOtp.get(i).getEmail().equals(user.getEmail())) {
 					newUserOtp = userOtp.get(i);
@@ -184,8 +193,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean forgetVerification(GenerateOTP generateOtp, User forgetUser) {
-		List<GenerateOTP> userOtp = userDao.getAllOtp();
+	public boolean forgetVerification(GenerateOtp generateOtp, User forgetUser) {
+		List<GenerateOtp> userOtp = userDao.getAllOtp();
 		List<User> userList = userDao.getAllUser();
 		for (int i = 0; i < userOtp.size(); i++) {
 			if (generateOtp.getOtpPassword().equals(userOtp.get(i).getOtpPassword())) {

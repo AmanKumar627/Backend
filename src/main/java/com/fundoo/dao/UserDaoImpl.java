@@ -2,14 +2,13 @@ package com.fundoo.dao;
 
 import java.util.List;
 
-import javax.persistence.TypedQuery;
-
-
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.fundoo.models.GenerateOTP;
+import com.fundoo.models.GenerateOtp;
 import com.fundoo.models.User;;
 
 
@@ -36,25 +35,25 @@ public class UserDaoImpl implements UserDAO{
 		return false;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "unchecked", "rawtypes", "unused" })
 	@Override
 	public List<User> getAllUser() 
 	{
 	
 		System.out.println("usrer");
-		TypedQuery query=factory.getCurrentSession().createQuery("from User");
+		Query query=factory.getCurrentSession().createQuery("from User");
 
 		
 		
-		List<User> userList=((org.hibernate.query.Query) query).list();
-		System.out.println(userList);
+		List<User> userList=query.list();
+		 System.out.println("hi "+userList);
 		return userList;
 		
 	
 	}
 
 	@Override
-	public void saveOtp(GenerateOTP userOtp) {
+	public void saveOtp(GenerateOtp userOtp) {
 		if(factory!=null)
 		{
 			System.out.println(userOtp.getEmail()+" "+userOtp.getOtpPassword());
@@ -64,15 +63,29 @@ public class UserDaoImpl implements UserDAO{
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	
+	@SuppressWarnings({ "unused", "unchecked" })
 	@Override
-	public List<GenerateOTP> getAllOtp() {
+	public List<GenerateOtp> getAllOtp() {
 
-		@SuppressWarnings("rawtypes")
-		TypedQuery query=factory.getCurrentSession().createQuery("from GenerateOtp");
-		@SuppressWarnings("rawtypes")
-		List<GenerateOTP> userList=((org.hibernate.query.Query) query).list();
+		System.out.println("list");
+	
+//		@SuppressWarnings("rawtypes")
+//		Query query=factory.getCurrentSession().createQuery("from GenerateOtp");
+//		
+//		List<GenerateOTP> userList=query.getResultList();
+//		System.out.println("get");
+//		return query.getResultList();Query query=factory.getCurrentSession().createQuery("from User");
+//		 Session currentSession = factory.getCurrentSession();
+	Query query=factory.getCurrentSession().createQuery("from GenerateOtp");
+
+		
+		
+		List<GenerateOtp> userList=query.list();
+		 System.out.println("hi "+userList);
 		return userList;
+		
+
 	}
 
 	
@@ -108,9 +121,9 @@ public class UserDaoImpl implements UserDAO{
 		return false;
 	}
 
+	
 	@Override
-	public boolean updateOtp(GenerateOTP newUserOtp) 
-	{
+	public boolean updateOtp(GenerateOtp newUserOtp) {
 		if(factory!=null)
 		{
 			System.out.println("updated");
@@ -119,7 +132,6 @@ public class UserDaoImpl implements UserDAO{
 			return true;
 		}
 		return false;
-		
 	}
 }
 	
