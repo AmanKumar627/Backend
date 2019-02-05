@@ -57,7 +57,8 @@ package com.fundoo.utility;
 	            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
 	            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
 	          
-	          
+	          System.out.println("abc");
+	          System.out.println(secret);
 	            return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
 	            
 	        }

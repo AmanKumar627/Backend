@@ -136,7 +136,10 @@ public class UserServiceImpl implements UserService {
 
 		List<User> userList = userDao.getAllUser();
 		for (int i = 0; i < userList.size(); i++) {
+			System.out.println("test1");
 			String encrptedPassword = Utility.encrypt(user.getPassword(), key);
+			System.out.println( Utility.encrypt(user.getPassword(), key));
+			System.out.println("test2");
 			System.out.println(encrptedPassword);
 			
 			if (user.getEmail().equals(userList.get(i).getEmail())

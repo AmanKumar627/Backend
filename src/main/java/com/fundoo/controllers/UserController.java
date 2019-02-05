@@ -152,8 +152,7 @@ public class UserController {
 		
 		
 		
-		
-		
+		;
 		System.out.println(tempUser);
 		boolean check=userService.addUser(tempUser);
 		
