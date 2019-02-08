@@ -99,7 +99,7 @@ public class UserController {
 		System.out.println("aman");
 		tempUser=new User();
 		tempUser=user;
-		System.out.println(user+"          sowndar");
+		System.out.println(user+"         ");
 		boolean check=userService.sendOtpCall(user);
 
 		response=new Response();

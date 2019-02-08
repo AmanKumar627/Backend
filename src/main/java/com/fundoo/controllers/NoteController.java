@@ -26,11 +26,11 @@ public class NoteController {
     
   
    @RequestMapping(value="addNote", method=RequestMethod.POST )
-   public ResponseEntity<Response>addNote(@RequestBody Note notes, String token){
+   public ResponseEntity<Response>addNote(@RequestBody Note note, @RequestHeader("token") String token){
 	   
 	  try {
 		   
-			noteService.addNote(notes, token);
+			noteService.addNote(note, token);
 			response=new Response();
 			response.setStatus("note added successfully");
 			return new ResponseEntity<Response>(HttpStatus.OK);
@@ -41,8 +41,9 @@ public class NoteController {
 	  
  }
 	  
+   
    @RequestMapping(value="getNotes",method=RequestMethod.GET)
-   public ResponseEntity<List<Note>> getNotes(@RequestBody Note notes, String token){
+   public ResponseEntity<List<Note>> getNotes(@RequestHeader("token") String token){
 		  
 	try {	
 	     List<Note> list= noteService.getNotes(token);
@@ -58,7 +59,8 @@ public class NoteController {
 
 	}
    
-   @RequestMapping(value="note/{noteId}",method=RequestMethod.DELETE)
+   
+   @RequestMapping(value="note/delete/{noteId}",method=RequestMethod.DELETE)
    public ResponseEntity<Response> deleteNotes(@PathVariable  int noteId,@RequestHeader String token){
 	   
 	  try { 
