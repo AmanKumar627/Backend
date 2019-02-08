@@ -2,6 +2,7 @@ package com.fundoo.dao;
 
 import java.util.List;
 
+
 import com.fundoo.models.Note;
 import com.fundoo.models.User;
 

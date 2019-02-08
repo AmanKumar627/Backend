@@ -30,9 +30,147 @@ public class NoteServiceImpl implements NoteService {
 	public Note getNotebyId(int noteId) {
 		// TODO Auto-generated method stub
 		
+		return noteDao.getNoteById(noteId);
+	}
+
+
+
+
+
+	@Override
+	public Note addNote(Note notes, String token) {
+		// TODO Auto-generated method stub
+		int userId=0;
+		try {
+			userId = UserToken.tokenVerify(token);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+			
+			notes.getUser().setUserId(userId);
+			noteDao.addNote(notes);
+		
 		
 		
 		return null;
+	}
+
+
+
+
+
+	@Override
+	public List<Note> getNotes(String token) {
+		// TODO Auto-generated method stub
+		int userId = 0;
+		try {
+			userId = UserToken.tokenVerify(token);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return noteDao.getNotes(userId);
+	
+		
+		
+		
+		
+		
+	}
+
+
+	@Override
+	public int deleteNote(int noteId, String token) {
+		// TODO Auto-generated method stub
+		int userId = 0;
+		try {
+			userId = UserToken.tokenVerify(token);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return noteDao.deletenote(noteId, userId);
+	
+		
+	}
+
+
+
+
+
+	@Override
+	public int updateNote(Note note, String token) {
+		// TODO Auto-generated method stub
+		int userId = 0;
+		try {
+			
+			
+			System.out.println(token);
+			
+			userId = UserToken.tokenVerify(token);
+
+			System.out.println("Token UserID : " + userId);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return noteDao.updatenote(note, userId);
+	}
+		
+		
+	
+	
+
+
+
+
+
+	@Override
+	public int archive(int noteId, String token) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+
+
+	@Override
+	public int pin(int noteId, String token) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+
+
+	@Override
+	public int trash(int noteId, String token) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+
+
+	@Override
+	public int color(int noteId, String color, String token) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+
+
+	@Override
+	public int reminder(int noteId, String reminder, String token) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 
