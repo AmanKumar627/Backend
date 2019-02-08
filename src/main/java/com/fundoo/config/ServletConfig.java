@@ -1,6 +1,7 @@
 package com.fundoo.config;
 
 import java.io.IOException;
+
 import java.util.Properties;
 
 import javax.sql.DataSource;

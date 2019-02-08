@@ -77,7 +77,7 @@ public class UserDaoImpl implements UserDAO{
 //		System.out.println("get");
 //		return query.getResultList();Query query=factory.getCurrentSession().createQuery("from User");
 //		 Session currentSession = factory.getCurrentSession();
-	   Query query=factory.getCurrentSession().createQuery("from GenerateOtp");
+	     Query query=factory.getCurrentSession().createQuery("from GenerateOtp");
 
 		
 		

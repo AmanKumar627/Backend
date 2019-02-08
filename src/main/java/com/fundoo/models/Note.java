@@ -50,16 +50,7 @@ public class Note implements Serializable {
 	
 	@Column(name="remainder")
 	private String remainder;
-	
 
-	
-	
-	
-	
-	
-	
-	
-	
 	public boolean isPinned() {
 		return pinned;
 	}

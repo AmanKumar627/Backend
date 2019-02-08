@@ -4,6 +4,7 @@ import java.util.List;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,8 +35,10 @@ public class UserServiceImpl implements UserService {
 	public boolean addUser(User user) {
 		
 		System.out.println(userDao + " " + key);
-		
+		System.out.println("check1"+user.getPassword());
 		String encryptedPassword = Utility.encrypt(user.getPassword(), key);
+		
+		System.out.println("check2");
 		System.out.println(key);
 		System.out.println("check2");
 		System.out.println(encryptedPassword);

@@ -2,6 +2,8 @@ package com.fundoo.controllers;
 
 import java.util.List;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +25,7 @@ public class NoteController {
 	@Autowired
 	NoteService noteService;
 	
-	@RequestMapping(value="/addNote",method=RequestMethod.POST) 
+	@RequestMapping(value="/addNote/",method=RequestMethod.POST) 
 	public ResponseEntity<Response> addNoteToUser(@RequestBody Note note,String token)
 	{
 		
@@ -86,6 +88,26 @@ public class NoteController {
 		System.out.println("before send "+userNote);
 		return new ResponseEntity<List<Note>>(userNote,HttpStatus.OK);
 	}
+	
+	
+	
+	@RequestMapping(value="note/getArchiveNote/noteId",method=RequestMethod.GET)
+	public ResponseEntity<?> getNoteId(@RequestHeader("Token")String token,PathVariable ) {
+		int userNote=noteService.getNoteId(token);
+		{
+			int NodeId=noteService.getNoteId(token);
+		}
+		return new ResponseEntity<>(userNote,HttpStatus.OK);
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value="/updateArchiveNote" , method=RequestMethod.POST)
 	public ResponseEntity<Response> updateArchive(@RequestBody Note note)
 	{
@@ -98,6 +120,9 @@ public class NoteController {
 		response.setStatus("note updated successfully");
 		return new ResponseEntity<Response>(response,HttpStatus.OK);
 	}
+	
+	 
+	
 }
   
 

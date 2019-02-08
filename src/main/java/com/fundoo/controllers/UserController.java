@@ -2,11 +2,12 @@ package com.fundoo.controllers;
 
 import javax.servlet.http.HttpServletResponse;
 
+
 import com.fundoo.models.Response;
 import com.fundoo.models.User;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 
 
 
@@ -23,13 +24,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fundoo.models.GenerateOtp;
 
 import com.fundoo.services.UserService;
-import com.fundoo.utility.Utility;
+
 
 
 
 @RestController
-
-@CrossOrigin(origins = { "http://localhost:4200" }, exposedHeaders = { "jwtTokenxxx" })
+//@CrossOrigin(origins = { "http://localhost:4200" }, exposedHeaders = { "jwtTokenxxx" })
+@RequestMapping("user/api")
 public class UserController {
 	
 	User tempUser, forgetUser;
@@ -131,7 +132,7 @@ public class UserController {
 			response.setStatusCode(200);
 			response.setStatus("otp is match");
 			
-			registerUser();
+			registerUser(forgetUser);
 		
 			
 			return new ResponseEntity<Response>(response,HttpStatus.OK);
@@ -144,15 +145,9 @@ public class UserController {
 	
 	
 	@RequestMapping(value="/registerUser",method=RequestMethod.POST)
-	public ResponseEntity<Response> registerUser()
+	public ResponseEntity<Response> registerUser(@RequestBody User tempUser )
 	{
-		
-		
-		
-		
-		
-		
-		;
+	
 		System.out.println(tempUser);
 		boolean check=userService.addUser(tempUser);
 		
@@ -183,7 +178,6 @@ public class UserController {
 		return new ResponseEntity<Response>(response,HttpStatus.NOT_FOUND);
 		
 	}
-	
 	
 	
 	@RequestMapping("/deleteUser/{id}")
@@ -221,8 +215,7 @@ public class UserController {
 				
 	}
 	
-	
-	
+
 	@RequestMapping(value="/forgetOtpVerification", method=RequestMethod.POST)
 	public ResponseEntity<Response> forgetOtpVerify(@RequestBody GenerateOtp generateOtp)
 	{
@@ -238,6 +231,11 @@ public class UserController {
 		response.setStatus("otp is wrong");
 		return new ResponseEntity<Response>(response,HttpStatus.NOT_FOUND);
 	}
+	
+	
+	
+	
+	
 	
 }	
 	

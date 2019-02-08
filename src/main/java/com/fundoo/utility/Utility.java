@@ -4,6 +4,7 @@ package com.fundoo.utility;
 	import java.io.UnsupportedEncodingException;
 
 
+
 	import java.security.MessageDigest;
 	import java.security.NoSuchAlgorithmException;
 	import java.util.Arrays;
@@ -50,15 +51,18 @@ package com.fundoo.utility;
 	    }
 	 
 	    public static String encrypt(String strToEncrypt, String secret)
-	    {
+	    {   
+	    	System.out.println("check5");
 	        try
 	        {
 	            setKey(secret);
+	            System.out.println("aman");
 	            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
 	            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
 	          
 	          System.out.println("abc");
 	          System.out.println(secret);
+	          System.out.println("aul");
 	            return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
 	            
 	        }
