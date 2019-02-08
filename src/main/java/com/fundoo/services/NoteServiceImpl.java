@@ -40,21 +40,26 @@ public class NoteServiceImpl implements NoteService {
 	@Override
 	public Note addNote(Note notes, String token) {
 		// TODO Auto-generated method stub
-		int userId=0;
+		int userTokenId=0;
 		try {
-			userId = UserToken.tokenVerify(token);
+			userTokenId = UserToken.tokenVerify(token);
+			
+			
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		int userId=notes.getUser().getUserId();
 			
-			notes.getUser().setUserId(userId);
+		if(userTokenId==userId)
+		{
 			noteDao.addNote(notes);
+		}
+			
 		
 		
-		
-		return null;
+		return notes;
 	}
 
 
@@ -81,16 +86,23 @@ public class NoteServiceImpl implements NoteService {
 	}
 
 
-	@Override
-	public int deleteNote(int noteId, String token) {
+	public int deleteNote(Note notes, String token) {
 		// TODO Auto-generated method stub
-		int userId = 0;
+		int usertokenId = 0;
 		try {
-			userId = UserToken.tokenVerify(token);
+			usertokenId = UserToken.tokenVerify(token);
+		int userId=notes.getUser().getUserId();
+		if(usertokenId==userId)
+		{
+			noteDao.deletenote(usertokenId,userId);
+		}
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return noteDao.deletenote(noteId, userId);
+		return usertokenId;
+		
 	
 		
 	}
@@ -102,34 +114,35 @@ public class NoteServiceImpl implements NoteService {
 	@Override
 	public int updateNote(Note note, String token) {
 		// TODO Auto-generated method stub
-		int userId = 0;
+		int usertokenId = 0;
 		try {
 			
 			
 			System.out.println(token);
 			
-			userId = UserToken.tokenVerify(token);
-
-			System.out.println("Token UserID : " + userId);
+			usertokenId = UserToken.tokenVerify(token);
+             int userId=note.getUser().getUserId();
+             if(usertokenId==userId)
+             {
+            	 int result=noteDao.updatenote(note);
+             }
+			System.out.println("Token UserID : " + usertokenId);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return noteDao.updatenote(note, userId);
+		return 0;
 	}
 		
 		
-	
-	
-
-
-
-
-
 	@Override
 	public int archive(int noteId, String token) {
 		// TODO Auto-generated method stub
+		
+		
+		
+		
 		return 0;
 	}
 
@@ -140,6 +153,12 @@ public class NoteServiceImpl implements NoteService {
 	@Override
 	public int pin(int noteId, String token) {
 		// TODO Auto-generated method stub
+		
+		
+		
+		
+		
+		
 		return 0;
 	}
 
@@ -169,6 +188,16 @@ public class NoteServiceImpl implements NoteService {
 
 	@Override
 	public int reminder(int noteId, String reminder, String token) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+
+
+	@Override
+	public int deleteNote(int noteId, String token) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

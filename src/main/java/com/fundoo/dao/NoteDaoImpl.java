@@ -3,14 +3,15 @@ package com.fundoo.dao;
 import java.util.List;
 
 
+
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
+
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.fundoo.models.Note;
-import com.fundoo.models.User;
+
 
 
 @Repository
@@ -35,9 +36,11 @@ public class NoteDaoImpl implements NoteDao{
 		// TODO Auto-generated method stub
 		System.out.println(userId );
 		String hql= "FROM Note n WHERE n.user.userId=" + userId;
-        Query query = factory.getCurrentSession().createQuery(hql);
+        @SuppressWarnings("rawtypes")
+		Query query = factory.getCurrentSession().createQuery(hql);
         
-        List<Note> notelist= query.list();
+        @SuppressWarnings("unchecked")
+		List<Note> notelist= query.list();
         
 		return notelist;
 	}
@@ -45,8 +48,9 @@ public class NoteDaoImpl implements NoteDao{
 	@Override
 	public Note getNoteById(int noteId) {
 		// TODO Auto-generated method stub
-		String hql= "FROM Note WHERE noteId=" + noteId;
-		Query query= factory.getCurrentSession().createQuery(hql);
+		 String hql= "FROM Note WHERE noteId=" + noteId;
+		 @SuppressWarnings("rawtypes")
+		 Query query= factory.getCurrentSession().createQuery(hql);
 		 Note note= (Note) query.uniqueResult();
 		
 		return note;
@@ -58,6 +62,7 @@ public class NoteDaoImpl implements NoteDao{
 		int result=0;
 		
 		String hql= "DELETE FROM Note WHERE noteId = :noteId userId = :userId";
+		@SuppressWarnings("rawtypes")
 		Query query=factory.getCurrentSession().createQuery(hql);
 		query.setParameter("noteId", noteId);
 		query.setParameter("userId", userId);
@@ -66,9 +71,9 @@ public class NoteDaoImpl implements NoteDao{
 	}
 
 	@Override
-	public int updatenote(Note note, int userId) {
+	public int updatenote(Note note) {
 		// TODO Auto-generated method stub
-		System.out.println("userId" +userId);
+
 	   factory.getCurrentSession().update(note);
 
 		return note.getNoteId();

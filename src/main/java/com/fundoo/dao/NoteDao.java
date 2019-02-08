@@ -12,7 +12,8 @@ public interface NoteDao {
      public List<Note> getNotes(int userId);
      public Note getNoteById(int noteId);
      public int deletenote(int noteId, int userId);
-     public int updatenote(Note note,int userId);
+     public int updatenote(Note note);
+	
 	
 //	Note getNote(User user);
 //

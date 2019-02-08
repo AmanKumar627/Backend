@@ -1,6 +1,7 @@
 package com.fundoo.models;
 
 import java.io.Serializable;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -143,7 +144,7 @@ public class Note implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name="userid")
+	@JoinColumn(name="userId")
 	User user;
 	
 	/*

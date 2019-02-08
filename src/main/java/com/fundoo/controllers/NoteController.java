@@ -2,9 +2,6 @@ package com.fundoo.controllers;
 
 import java.util.List;
 
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +29,10 @@ public class NoteController {
    public ResponseEntity<Response>addNote(@RequestBody Note notes, String token){
 	   
 	  try {
+		   
 			noteService.addNote(notes, token);
+			response=new Response();
+			response.setStatus("note added successfully");
 			return new ResponseEntity<Response>(HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,7 +59,7 @@ public class NoteController {
 	}
    
    @RequestMapping(value="note/{noteId}",method=RequestMethod.DELETE)
-   public ResponseEntity<Response> deleteNotes(@RequestBody int noteId,String token){
+   public ResponseEntity<Response> deleteNotes(@PathVariable  int noteId,@RequestHeader String token){
 	   
 	  try { 
 	   

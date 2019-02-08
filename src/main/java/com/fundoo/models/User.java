@@ -18,6 +18,11 @@ public class User implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@PrimaryKeyJoinColumn
+	private String name;
+	private String email;
+	private String password;
+	private String phoneNumber;
+	private int isActive;
 	private int userId;
 	public int getUserId() {
 		return userId;
@@ -57,11 +62,7 @@ public class User implements Serializable{
 		this.isActive = isActive;
 	}
 
-	private String name;
-	private String email;
-	private String password;
-	private String phoneNumber;
-	private int isActive;
+	
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", name=" + name + ", email=" + email + ", password=" + password
