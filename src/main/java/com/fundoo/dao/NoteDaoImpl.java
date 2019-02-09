@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.fundoo.models.Note;
+import com.fundoo.models.User;
 
 
 
@@ -22,64 +23,101 @@ public class NoteDaoImpl implements NoteDao{
 	SessionFactory factory;
 
 	@Override
-	public void addNote(Note note) {
+	public boolean saveNote(Note note) {
 		// TODO Auto-generated method stub
-		factory.getCurrentSession().save(note);
+		if(factory!=null)
+		{
+			factory.getCurrentSession().save(note);
+			System.out.println("after save "+note);
+
+			System.out.println("note added successfull");
+			return true;
+		}
+	//factory.getCurrentSession().save(user);
+	return false;
+
+	}
 		
 		
+		
+	
+
+	@Override
+	public Note getNote(int id) {
+		// TODO Auto-generated method stub
+		 Note note=(Note) factory.getCurrentSession().get(Note.class,id);
+		 return note;
 		
 		
 	}
 
 	@Override
-	public List<Note> getNotes(int userId) {
+	public boolean updateNote(Note note) {
 		// TODO Auto-generated method stub
-		System.out.println(userId );
-		String hql= "FROM Note n WHERE n.user.userId=" + userId;
-        @SuppressWarnings("rawtypes")
-		Query query = factory.getCurrentSession().createQuery(hql);
-        
-        @SuppressWarnings("unchecked")
-		List<Note> notelist= query.list();
-        
-		return notelist;
-	}
-
-	@Override
-	public Note getNoteById(int noteId) {
-		// TODO Auto-generated method stub
-		 String hql= "FROM Note WHERE noteId=" + noteId;
-		 @SuppressWarnings("rawtypes")
-		 Query query= factory.getCurrentSession().createQuery(hql);
-		 Note note= (Note) query.uniqueResult();
+		if(factory!=null)
+		{
+			factory.getCurrentSession().update(note);
+			System.out.println("update  " +note);
+			System.out.println("Note updated successfully");
+			return true;
+		}
 		
-		return note;
-	}
-
-	@Override
-	public int deletenote(int noteId, int userId) {
-		// TODO Auto-generated method stub
-		int result=0;
+	
 		
-		String hql= "DELETE FROM Note WHERE noteId = :noteId userId = :userId";
-		@SuppressWarnings("rawtypes")
-		Query query=factory.getCurrentSession().createQuery(hql);
-		query.setParameter("noteId", noteId);
-		query.setParameter("userId", userId);
-		result=query.executeUpdate();
-		return result;
+		return false;
+	}
+
+//	@Override
+//	public List<Note> getAllNotes(int userId) {
+//		// TODO Auto-generated method stub
+//		if(factory!=null)
+//		{	
+//		
+//			  @SuppressWarnings("unchecked")
+//			List<Note> noteList =factory. getCurrentSession().createCriteria(Note.class).createCriteria("user").add(Restrictions.eq("userId", userId)).list();
+//			  System.out.println("get all notes call finish");
+//			  return noteList;
+//		}
+//		return null;
+//	}
+//		
+//		
+	
+
+	@Override
+	public Note getArchiveNote(User user) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public int updatenote(Note note) {
+	public boolean deleteNote(Note note) {
 		// TODO Auto-generated method stub
-
-	   factory.getCurrentSession().update(note);
-
-		return note.getNoteId();
+		if(factory!=null)
+		{
+			System.out.println(note);
+			factory.getCurrentSession().delete(note);
+			return true;
+		}
+		return false;
 	}
+
+
+
+
+
+	@Override
+	public List<Note> getAllNotes(int userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+		
+
 	
 }
+	
+	
 	
 	
 	

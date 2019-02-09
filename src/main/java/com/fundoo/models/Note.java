@@ -40,25 +40,25 @@ public class Note implements Serializable {
 	@Column(name="trash")
 	private boolean trash;
 	 
-	@Column(name="createStamp")
-	private Date createStamp;
-	 
-	@Column(name="image")
-	private String image;
-	
-	@Column(name="lastModifiedStamp")
-	private Date lastModifiedStamp;
-	
-	@Column(name="remainder")
-	private String remainder;
-
-	public boolean isPinned() {
-		return pinned;
-	}
-
-	public void setPinned(boolean pinned) {
-		this.pinned = pinned;
-	}
+//	@Column(name="createStamp")
+//	private Date createStamp;
+//	 
+//	@Column(name="image")
+//	private String image;
+//	
+//	@Column(name="lastModifiedStamp")
+//	private Date lastModifiedStamp;
+//	
+//	@Column(name="remainder")
+//	private String remainder;
+//
+//	public boolean isPinned() {
+//		return pinned;
+//	}
+//
+//	public void setPinned(boolean pinned) {
+//		this.pinned = pinned;
+//	}
 
 	
 
@@ -87,37 +87,37 @@ public class Note implements Serializable {
 		this.trash = trash;
 	}
 
-	public Date getCreateStamp() {
-		return createStamp;
-	}
-
-	public void setCreateStamp(Date createStamp) {
-		this.createStamp = createStamp;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public Date getLastModifiedStamp() {
-		return lastModifiedStamp;
-	}
-
-	public void setLastModifiedStamp(Date lastModifiedStamp) {
-		this.lastModifiedStamp = lastModifiedStamp;
-	}
-
-	public String getRemainder() {
-		return remainder;
-	}
-
-	public void setRemainder(String remainder) {
-		this.remainder = remainder;
-	}
+//	public Date getCreateStamp() {
+//		return createStamp;
+//	}
+//
+//	public void setCreateStamp(Date createStamp) {
+//		this.createStamp = createStamp;
+//	}
+//
+//	public String getImage() {
+//		return image;
+//	}
+//
+//	public void setImage(String image) {
+//		this.image = image;
+//	}
+//
+//	public Date getLastModifiedStamp() {
+//		return lastModifiedStamp;
+//	}
+//
+//	public void setLastModifiedStamp(Date lastModifiedStamp) {
+//		this.lastModifiedStamp = lastModifiedStamp;
+//	}
+//
+//	public String getRemainder() {
+//		return remainder;
+//	}
+//
+//	public void setRemainder(String remainder) {
+//		this.remainder = remainder;
+//	}
 
 	public String getTitle() {
 		return title;
@@ -135,13 +135,7 @@ public class Note implements Serializable {
 		this.description = description;
 	}
 
-	@Override
-	public String toString() {
-		return "Note [noteId=" + noteId + ", title=" + title + ", description=" + description + ", pinned=" + pinned
-				+ ", archive=" + archive + ", color=" + color + ", trash=" + trash + ", createStamp=" + createStamp
-				+ ", image=" + image + ", lastModifiedStamp=" + lastModifiedStamp + ", remainder=" + remainder
-				+ ", user=" + user + "]";
-	}
+	
 
 	@ManyToOne
 	@JoinColumn(name="userId")
@@ -171,5 +165,11 @@ public class Note implements Serializable {
 		this.user = user;
 	}
 
+	@Override
+	public String toString() {
+		return "Note [noteId=" + noteId + ", title=" + title + ", description=" + description + ", pinned=" + pinned
+				+ ", archive=" + archive + ", color=" + color + ", trash=" + trash + ", user=" + user + "]";
+	}
+         
 	
 }

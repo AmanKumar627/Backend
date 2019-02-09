@@ -8,6 +8,8 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.Verification;
 
 public class UserToken {
+	
+	
 	public static String TOKEN_SECRET="gh2we43jue";
     public static String generateToken(Integer id) throws Exception
     {
@@ -36,6 +38,8 @@ public class UserToken {
             System.out.println(id+"id");
         
             return id;
+          
+            
     }
-
+     
 }
